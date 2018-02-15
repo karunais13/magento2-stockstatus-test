@@ -1,0 +1,43 @@
+<table class="table table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">Name</th>
+      <th class="text-center" scope="col">SKU</th>
+      <th class="text-center" scope="col">Total Qty</th>
+      <th class="text-center" scope="col">Available Qty</th>
+      <th class="text-center" scope="col">Qty in pending orders</th>
+      <th class="text-center" scope="col">Qty in processing orders</th>
+    </tr>
+  </thead>
+  <tbody>
+      <?php foreach ($this->getProductData() as $key => $product): ?>
+          <tr>
+              <?php
+                $productId    = $product->getId();
+                $productStatus    = $this->getProductOrderStatus();
+                $av   = $this->getStockAvailableQty($productId);
+                $pen  = $pro = $com = 0;
+                if( array_key_exists($productId, $productStatus) ){
+                    $pen  = $productStatus[$productId]['pending'];
+                    $pro  = $productStatus[$productId]['processing'];
+                    $com  = $productStatus[$productId]['complete'];
+                }
+                $total  = $av + $pen + $pro + $com;
+               ?>
+              <td><?php echo $product->getId(); ?></td>
+              <td><?php echo $product->getName(); ?></td>
+              <td class="text-center"><?php echo $product->getSku(); ?></td>
+              <td class="text-right"><?php echo $total ?></td>
+              <td class="text-right"><?php echo $av ?></td>
+              <td class="text-right"><?php echo $pen ?></td>
+              <td class="text-right"><?php echo $pro?></td>
+          </tr>
+      <?php endforeach; ?>
+  </tbody>
+</table>
+
+
+<div class="order-products-toolbar toolbar bottom">
+<?php echo $this->getPagerHtml(); ?>
+</div>

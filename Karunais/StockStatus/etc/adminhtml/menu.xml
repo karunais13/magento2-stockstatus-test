@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+  <menu>
+   <add id="Karunais_StockStatus::catalog" title="Catalog" module="Karunais_StockStatus" sortOrder="999" resource="Karunais_StockStatus::catalog"/>
+   <add id="Karunais_StockStatus::inventory" title="Inventory" module="Karunais_StockStatus" sortOrder="10" parent="Karunais_StockStatus::catalog" resource="Karunais_StockStatus::inventory"/>
+   <add id="Karunais_StockStatus::stockstatus" title="Stock Status " module="Karunais_StockStatus" sortOrder="10" parent="Karunais_StockStatus::inventory" resource="Karunais_StockStatus::stockstatus" action="stockstatus/stocklist"/>
+  </menu>
+</config>
